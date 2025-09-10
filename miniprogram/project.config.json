@@ -1,0 +1,71 @@
+{
+  "description": "StorySpark WeChat Mini-Program",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "bundle": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "urlCheck": false,
+    "scopeDataCheck": false,
+    "coverView": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmRelationList": [],
+    "minifyWXML": true,
+    "disableSourceMap": false,
+    "minifyJS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.19.4",
+  "appid": "your-wechat-appid",
+  "projectname": "storyspark-miniprogram",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "scripts": {},
+  "staticServerOptions": {
+    "baseURL": "",
+    "servePath": ""
+  },
+  "isGameTourist": false,
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": []
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <text class="page-title">个人中心</text>
+  <view class="placeholder">
+    <text>个人中心开发中...</text>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+<!--pages/stories/stories.wxml-->
+<view class="container">
+  <text class="page-title">故事世界</text>
+  <view class="placeholder">
+    <text>故事功能开发中...</text>
+  </view>
+</view>

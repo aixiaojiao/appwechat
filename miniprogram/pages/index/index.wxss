@@ -1,0 +1,162 @@
+/* pages/index/index.wxss */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 40rpx 20rpx;
+}
+
+/* Loading State */
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.loading-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border: 6rpx solid #e5e5e5;
+  border-top: 6rpx solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 30rpx;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+}
+
+/* Login State */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100rpx;
+}
+
+.logo {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.app-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 10rpx;
+}
+
+.app-subtitle {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.login-section {
+  width: 100%;
+  max-width: 600rpx;
+}
+
+.login-btn {
+  width: 100%;
+  height: 88rpx;
+  font-size: 36rpx;
+  margin-bottom: 30rpx;
+}
+
+.error-message {
+  text-align: center;
+  color: #ff4757;
+  font-size: 28rpx;
+  padding: 20rpx;
+  background-color: rgba(255, 71, 87, 0.1);
+  border-radius: 8rpx;
+}
+
+/* Main Content */
+.main-content {
+  max-width: 700rpx;
+  margin: 0 auto;
+}
+
+.welcome-section {
+  margin-bottom: 60rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 40rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  margin-right: 30rpx;
+}
+
+.welcome-text {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Feature Cards */
+.feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.story-card, .device-card {
+  display: flex;
+  align-items: center;
+  padding: 40rpx;
+  background: white;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.story-card:active, .device-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.card-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 30rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10rpx;
+}
+
+.card-subtitle {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}

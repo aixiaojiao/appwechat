@@ -1,0 +1,56 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- Loading State -->
+  <view wx:if="{{loading}}" class="loading-wrapper">
+    <view class="loading-icon"></view>
+    <text class="loading-text">{{loadingText || '正在登录...'}}</text>
+  </view>
+
+  <!-- Not Logged In State -->
+  <view wx:elif="{{!isLoggedIn}}" class="login-wrapper">
+    <view class="logo-section">
+      <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+      <text class="app-title">StorySpark</text>
+      <text class="app-subtitle">智能故事伴侣</text>
+    </view>
+
+    <view class="login-section">
+      <button 
+        class="btn btn-primary login-btn {{loading ? 'loading' : ''}}"
+        bindtap="handleWeChatLogin"
+        disabled="{{loading}}"
+      >
+        <text wx:if="{{!loading}}">微信登录</text>
+        <text wx:else>{{loadingText}}</text>
+      </button>
+      
+      <view wx:if="{{errorMessage}}" class="error-message">
+        <text>{{errorMessage}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Logged In State -->
+  <view wx:else class="main-content">
+    <view class="welcome-section">
+      <view class="user-info">
+        <image class="avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <text class="welcome-text">你好，{{userInfo.nickname || '用户'}}</text>
+      </view>
+    </view>
+
+    <view class="feature-cards">
+      <view class="card story-card" bindtap="goToStories">
+        <image class="card-icon" src="/images/stories-large.png" mode="aspectFit"></image>
+        <text class="card-title">开始讲故事</text>
+        <text class="card-subtitle">与StorySpark一起创造精彩故事</text>
+      </view>
+
+      <view class="card device-card" bindtap="goToDeviceConnection">
+        <image class="card-icon" src="/images/device-large.png" mode="aspectFit"></image>
+        <text class="card-title">连接设备</text>
+        <text class="card-subtitle">连接您的StorySpark智能玩具</text>
+      </view>
+    </view>
+  </view>
+</view>

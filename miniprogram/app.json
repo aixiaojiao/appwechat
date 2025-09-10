@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/stories/stories", 
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "StorySpark",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/stories/stories",
+        "iconPath": "images/stories.png",
+        "selectedIconPath": "images/stories-active.png",
+        "text": "故事"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userInfo": {
+      "desc": "用于获取用户信息"
+    }
+  },
+  "requiredBackgroundModes": ["audio"],
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

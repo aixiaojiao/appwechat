@@ -1,0 +1,75 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+/* Global Color Variables */
+page {
+  --primary-color: #3cc51f;
+  --secondary-color: #7A7E83;
+  --background-color: #f8f8f8;
+  --text-primary: #333;
+  --text-secondary: #999;
+  --border-color: #e5e5e5;
+}
+
+/* Common Button Styles */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 48rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 2rpx solid var(--border-color);
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Common Card */
+.card {
+  background: white;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
+}
+
+/* Text Styles */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-center {
+  text-align: center;
+}
