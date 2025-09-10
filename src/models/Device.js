@@ -9,8 +9,8 @@ class Device extends BaseModel {
     super(data);
     
     // Set default values specific to Device
-    if (data.is_active === undefined) {
-      this.data.is_active = true;
+    if (data.is_paired === undefined) {
+      this.data.is_paired = false;
     }
   }
 
@@ -38,36 +38,73 @@ class Device extends BaseModel {
           return null;
         }
       },
-      device_id: {
+      device_name: {
         required: true,
         type: 'string',
         maxLength: 255,
         validate: (value) => {
-          // Device ID should be alphanumeric with some special characters
-          if (!/^[a-zA-Z0-9_.-]+$/.test(value)) {
-            return 'device_id can only contain letters, numbers, underscores, periods, and hyphens';
-          }
-          if (value.length < 5) {
-            return 'device_id must be at least 5 characters long';
+          if (value.length < 2) {
+            return 'device_name must be at least 2 characters long';
           }
           return null;
         }
       },
       device_type: {
-        required: false,
+        required: true,
         type: 'string',
         maxLength: 50,
         validate: (value) => {
           if (value) {
-            // Common device types for WeChat mini-programs
+            // Device types for StorySpark BLE speakers
             const validTypes = [
-              'ios', 'android', 'windows', 'mac', 'linux',
-              'iphone', 'ipad', 'android-phone', 'android-tablet',
-              'wechat-devtools', 'unknown'
+              'speaker', 'ble_speaker', 'smart_speaker', 'story_speaker'
             ];
             if (!validTypes.includes(value.toLowerCase())) {
               return `device_type must be one of: ${validTypes.join(', ')}`;
             }
+          }
+          return null;
+        }
+      },
+      mac_address: {
+        required: false,
+        type: 'string',
+        validate: (value) => {
+          if (value) {
+            // MAC address validation
+            const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+            if (!macRegex.test(value)) {
+              return 'mac_address must be in format XX:XX:XX:XX:XX:XX or XX-XX-XX-XX-XX-XX';
+            }
+          }
+          return null;
+        }
+      },
+      pairing_code: {
+        required: false,
+        type: 'string',
+        validate: (value) => {
+          if (value && !/^[A-Z0-9]{6}$/.test(value)) {
+            return 'pairing_code must be 6 uppercase alphanumeric characters';
+          }
+          return null;
+        }
+      },
+      is_paired: {
+        required: false,
+        validate: (value) => {
+          if (value !== undefined && typeof value !== 'boolean') {
+            return 'is_paired must be a boolean value';
+          }
+          return null;
+        }
+      },
+      last_seen: {
+        required: false,
+        type: 'string',
+        validate: (value) => {
+          if (value && isNaN(Date.parse(value))) {
+            return 'last_seen must be a valid ISO 8601 date string';
           }
           return null;
         }
@@ -115,7 +152,7 @@ class Device extends BaseModel {
   /**
    * Find devices by user ID
    */
-  static async findByUserId(userId) {
+  static async findByUser(userId) {
     if (!userId) {
       return [];
     }
@@ -124,16 +161,16 @@ class Device extends BaseModel {
   }
 
   /**
-   * Find active devices by user ID
+   * Find paired devices by user ID
    */
-  static async findActiveByUserId(userId) {
+  static async findPairedByUser(userId) {
     if (!userId) {
       return [];
     }
     
     return this.findBy({ 
       user_id: userId,
-      is_active: true 
+      is_paired: true 
     });
   }
 
@@ -201,26 +238,50 @@ class Device extends BaseModel {
   }
 
   /**
-   * Deactivate this device
+   * Generate a pairing code for BLE device connection
    */
-  async deactivate() {
-    this.set('is_active', false);
+  generatePairingCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    this.set('pairing_code', code);
+    return code;
+  }
+
+  /**
+   * Mark device as paired
+   */
+  async markAsPaired() {
+    this.set('is_paired', true);
+    this.set('pairing_code', null); // Clear pairing code after successful pairing
+    this.set('last_seen', new Date().toISOString());
     return this.save();
   }
 
   /**
-   * Activate this device
+   * Mark device as unpaired
    */
-  async activate() {
-    this.set('is_active', true);
+  async markAsUnpaired() {
+    this.set('is_paired', false);
+    this.set('pairing_code', null);
     return this.save();
   }
 
   /**
-   * Check if device is active
+   * Check if device is paired
    */
-  isActive() {
-    return this.data.is_active === true;
+  isPaired() {
+    return this.data.is_paired === true;
+  }
+
+  /**
+   * Update last seen timestamp for BLE connection tracking
+   */
+  async updateLastSeen() {
+    this.set('last_seen', new Date().toISOString());
+    return this.save();
   }
 
   /**

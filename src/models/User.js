@@ -141,9 +141,8 @@ class User extends BaseModel {
    * Get user's devices
    */
   async getDevices() {
-    // This will be implemented via association in index.js
     const Device = require('./Device');
-    return Device.findBy({ user_id: this.data.id });
+    return Device.findByUser(this.data.id);
   }
 
   /**

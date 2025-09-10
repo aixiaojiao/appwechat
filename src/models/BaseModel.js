@@ -1,4 +1,5 @@
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
+const dbConnection = require('../config/database');
 
 /**
  * BaseModel provides common CRUD operations and validation framework
@@ -12,7 +13,7 @@ class BaseModel {
     this._associations = {};
     
     // Set default values
-    this.data.id = data.id || uuidv4();
+    this.data.id = data.id || randomUUID();
     this.data.created_at = data.created_at || new Date().toISOString();
     this.data.updated_at = data.updated_at || new Date().toISOString();
     
@@ -156,18 +157,14 @@ class BaseModel {
 
   /**
    * Execute a prepared statement with error handling
-   * This is a placeholder - actual implementation would depend on database driver
    */
   static async executeQuery(query, params = []) {
-    // This would be implemented with actual database connection
-    // For now, return a mock response
-    console.log('Executing query:', query, 'with params:', params);
-    
-    // Simulate database response
-    return {
-      rows: [],
-      rowCount: 0
-    };
+    try {
+      return await dbConnection.query(query, params);
+    } catch (error) {
+      console.error('Database query error:', { query, params, error: error.message });
+      throw error;
+    }
   }
 
   /**
